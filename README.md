@@ -1,11 +1,11 @@
-#Lit-element-router
+# Lit-element-router
 
 This is work in progress... seriously - don't use this yet... 
 
 Inspiration and lots of snippets used from Preact-router - https://github.com/developit/preact-router
 
 
-#Wishlist
+# Wishlist
 - statiske 
 - dynamiske paths
 - route - (import {route} from './lit-element-router.js' og så route('/about');
@@ -14,10 +14,27 @@ Inspiration and lots of snippets used from Preact-router - https://github.com/de
 - only handle routeable urls...
 - automatically hijack local a-tags
 - also route if anybody else changes history (listen for pop)
-- more than one router?
+- child routes?
+- lazy load a route
 - dont init all pages up front...
 - a catch-all route (for 404 or generic)
 - some reusing? - at least when same route + same params
+- redirect 
 
 
+
+# API-suggestion
+In stead of putting the path on the individual elements, make a route-element that loads excisting elements, imports new ones or just uses an inline template
+
+<router>
+    <route path="/" element="home-page"></route>
+    <route path="/lazy" import="lazy-element.js"></route>
+    <route path="/no-element">
+        <template>
+            Yo this is cool
+        </template>
+    </route>
+    <route path="*" redirect="/"></route>
+
+</router>
 

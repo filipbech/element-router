@@ -11,8 +11,8 @@ export class Page3Element extends LitElement {
     }
     render() {
         return html`
-            <h1>This is page 3</h1>
-            <p>lorem ipsum - ${this.test}</p>
+            <h1>This is a dynamic route</h1>
+            <p>You are at: ${this.test}</p>
         `
     }
 }

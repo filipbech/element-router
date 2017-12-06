@@ -84,7 +84,7 @@ export class LitElementRouter extends LitElement {
             let ret;
             for (let i = 0; i < max; i++) {
                 if (pathSegments[i] && pathSegments[i].charAt(0) === ':') {
-                    let param = pathSegments[i].replace(/(^\:|[+*?]+$)/g, ''),
+                    let param = pathSegments[i].replace(/(^\:|[+*?]+$)/g, '');
                         flags = (pathSegments[i].match(/[+*?]+$/) || EMPTY)[0] || '',
                         plus = ~flags.indexOf('+'),
                         star = ~flags.indexOf('*'),
@@ -117,3 +117,10 @@ export class LitElementRouter extends LitElement {
     }
 }
 customElements.define('lit-element-router', LitElementRouter);
+
+
+export class LitElementRoute extends HTMLElement{
+
+}
+
+customElements.define('lit-element-route', LitElementRoute);
