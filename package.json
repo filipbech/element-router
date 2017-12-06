@@ -1,0 +1,17 @@
+{
+  "name": "lit-element-router",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "ws --spa index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit-html-element": "^0.6.10"
+  },
+  "devDependencies": {
+    "local-web-server": "^2.2.4"
+  }
+}
