@@ -1,28 +1,19 @@
-import { html, LitElement } from './node_modules/lit-html-element/lit-element.js';
-
 const ROUTERS = [];
 const EMPTY = {};
 
 export const route = (url, replace = false) => {
+    if (url === getCurrentUrl()) {
+        return;
+    }
+
     if (typeof url !== 'string' && url.url) {
         replace = url.replace;
         url = url.url;
     }
-
-    setUrl(url, replace ? 'replace' : 'push');
+    history.pushState(null, null, url);
 
     return ROUTERS[0].routeTo(url);
-    console.log('route to: ', url);
 };
-
-window['route'] = route;
-
-
-function setUrl(url, type = 'push') {
-    if (typeof history !== 'undefined' && history[type + 'State']) {
-        history[type + 'State'](null, null, url);
-    }
-}
 
 function getCurrentUrl() {
     let url = typeof location !== 'undefined' ? location : EMPTY;
@@ -33,39 +24,47 @@ function segmentize(url) {
     return url.replace(/(^\/+|\/+$)/g, '').split('/');
 }
 
-
-const d = document.createElement('page-1');
-
-export class LitElementRouter extends LitElement {
+export class LitElementRouter extends HTMLElement {
     
     constructor() {
         super();
+        this.attachShadow({ mode: 'open' });
         if(ROUTERS.length) {
             throw new Error('only one outlet allowed');
         }
-        this.url = location.href.replace(location.origin, '');
+        this.routeTo(getCurrentUrl());
         ROUTERS.push(this);
+
     }
 
     routeTo(url) {
-        console.log('now route to: ', url);
         this.url = url;
-        this.invalidate();
+        this.render();
     }
 
 
-    cloneWithProperties(element, properties = {}) {
-        const clone = element.cloneNode();
-        for (let prop in properties) {
-            clone[prop] = properties[prop];
+    resolveElement(routeEle, properties = {}) {
+
+        let elementAttr = routeEle.getAttribute('element');
+        let returnEle;
+
+        if(elementAttr) {
+            returnEle = document.createElement(elementAttr);
         }
-        console.log(clone);
-        return clone;
+        let redirectAttr = routeEle.getAttribute('redirect');
+        if(redirectAttr) {
+            route(redirectAttr);
+            return null;
+        }
+
+        for (let prop in properties) {
+            returnEle[prop] = properties[prop];
+        }
+        return returnEle;
     }
 
     getMatchingChild(children, url) {
 
-        /* For later - getting queryParams */
         const queryRegex = /(?:\?([^#]*))?(#.*)?$/;
         //const queryParams = url.match(queryRegex);
         url = url.replace(queryRegex, '');
@@ -73,9 +72,17 @@ export class LitElementRouter extends LitElement {
 
         for (let child of children) {
             const path = child.getAttribute('path');
+            if (!path || child.nodeName !== "LIT-ELEMENT-ROUTE") {
+                break;
+            } 
+
+            if(path === '*') {
+                return this.resolveElement(child); 
+            }
+
             if(path === url) {
                 /** Fast exit if direct match */
-                return this.cloneWithProperties(child);
+                return this.resolveElement(child);
             }
             const pathSegments = segmentize(path);
             const matches = {};
@@ -84,7 +91,7 @@ export class LitElementRouter extends LitElement {
             let ret;
             for (let i = 0; i < max; i++) {
                 if (pathSegments[i] && pathSegments[i].charAt(0) === ':') {
-                    let param = pathSegments[i].replace(/(^\:|[+*?]+$)/g, '');
+                    let param = pathSegments[i].replace(/(^\:|[+*?]+$)/g, ''),
                         flags = (pathSegments[i].match(/[+*?]+$/) || EMPTY)[0] || '',
                         plus = ~flags.indexOf('+'),
                         star = ~flags.indexOf('*'),
@@ -107,13 +114,15 @@ export class LitElementRouter extends LitElement {
                 
             }
             if(ret) {
-                return this.cloneWithProperties(child, matches);
+                return this.resolveElement(child, matches);
             }
         }
     }
 
     render() {
-        return html`${this.getMatchingChild([...this.children], this.url)}`;
+        this.shadowRoot.innerHTML = '';
+        let element = this.getMatchingChild([...this.children], this.url);
+        element && this.shadowRoot.appendChild(element);
     }
 }
 customElements.define('lit-element-router', LitElementRouter);
