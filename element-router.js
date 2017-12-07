@@ -1,50 +1,51 @@
 const ROUTERS = [];
 const EMPTY = {};
 
-export const route = (url, replace = false) => {
+export const routeTo = (url) => {
     if (url === getCurrentUrl()) {
         return;
     }
-
-    if (typeof url !== 'string' && url.url) {
-        replace = url.replace;
-        url = url.url;
-    }
     history.pushState(null, null, url);
-
     return ROUTERS[0].routeTo(url);
 };
 
 function getCurrentUrl() {
-    let url = typeof location !== 'undefined' ? location : EMPTY;
-    return `${url.pathname || ''}${url.search || ''}`;
+    return `${location.pathname || ''}${location.search || ''}`;
 }
 
-function segmentize(url) {
+function createPathSegments(url) {
     return url.replace(/(^\/+|\/+$)/g, '').split('/');
 }
 
 export class ElementRouter extends HTMLElement {
-    
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
         if(ROUTERS.length) {
             throw new Error('only one outlet allowed');
         }
-        this.routeTo(getCurrentUrl());
         ROUTERS.push(this);
+        this.routeTo(getCurrentUrl());
 
+        addEventListener('popstate', () => {
+            routeTo(getCurrentUrl());
+        });
     }
 
-    routeTo(url) {
+    async routeTo(url) {
         this.url = url;
-        this.render();
+        this.shadowRoot.innerHTML = '';
+        const element = await this.getMatchingChild([...this.children], this.url);
+        element && this.shadowRoot.appendChild(element);
     }
 
-
-    resolveElement(routeEle, properties = {}) {
+    async resolveElement(routeEle, properties = {}) {
         let returnEle;
+
+        let importAttr = routeEle.getAttribute('import');
+        if (importAttr) {
+            await import(importAttr);
+        }
 
         let elementAttr = routeEle.getAttribute('element');
         if(elementAttr) {
@@ -53,7 +54,7 @@ export class ElementRouter extends HTMLElement {
 
         let redirectAttr = routeEle.getAttribute('redirect');
         if(redirectAttr) {
-            route(redirectAttr);
+            routeTo(redirectAttr);
             return null;
         }
 
@@ -73,7 +74,7 @@ export class ElementRouter extends HTMLElement {
         const queryRegex = /(?:\?([^#]*))?(#.*)?$/;
         //const queryParams = url.match(queryRegex);
         url = url.replace(queryRegex, '');
-        const urlSegments = segmentize(url);
+        const urlSegments = createPathSegments(url);
 
         for (let child of children) {
             const path = child.getAttribute('path');
@@ -89,7 +90,7 @@ export class ElementRouter extends HTMLElement {
                 /** Fast exit if direct match */
                 return this.resolveElement(child);
             }
-            const pathSegments = segmentize(path);
+            const pathSegments = createPathSegments(path);
             const matches = {};
 
             let max = Math.max(urlSegments.length, pathSegments.length);
@@ -123,18 +124,8 @@ export class ElementRouter extends HTMLElement {
             }
         }
     }
-
-    render() {
-        this.shadowRoot.innerHTML = '';
-        let element = this.getMatchingChild([...this.children], this.url);
-        element && this.shadowRoot.appendChild(element);
-    }
 }
 customElements.define('element-router', ElementRouter);
 
-
-export class ElementRoute extends HTMLElement{
-
-}
-
+export class ElementRoute extends HTMLElement{ }
 customElements.define('element-route', ElementRoute);
