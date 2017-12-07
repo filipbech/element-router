@@ -1,5 +1,5 @@
 {
-  "name": "lit-element-router",
+  "name": "element-router",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,10 +8,8 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "lit-html-element": "^0.6.10"
-  },
   "devDependencies": {
-    "local-web-server": "^2.2.4"
+    "local-web-server": "^2.2.4",
+    "lit-html-element": "^0.6.10"
   }
 }

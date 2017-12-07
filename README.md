@@ -1,4 +1,5 @@
-# Lit-element-router
+# Element-router
+# Element-router
 
 This is work in progress... seriously - don't use this yet... 
 
@@ -8,7 +9,7 @@ Inspiration and lots of snippets used from Preact-router - https://github.com/de
 # Wishlist
 x statiske 
 x dynamiske paths
-x route - (import {route} from './lit-element-router.js' og så route('/about');
+x route - (import {route} from './element-router.js' og så route('/about');
 - active på links
 - ability to listen for route-changes
 - only handle routeable urls...
@@ -21,7 +22,7 @@ x a catch-all route (for 404 or generic)
 - some reusing? - at least when same route + same params
 x redirects
 x skip lit dependency 
-- rename into just element-router
+x rename into just element-router
 x route to inline template
 
 # API-suggestion

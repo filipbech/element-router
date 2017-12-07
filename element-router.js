@@ -24,7 +24,7 @@ function segmentize(url) {
     return url.replace(/(^\/+|\/+$)/g, '').split('/');
 }
 
-export class LitElementRouter extends HTMLElement {
+export class ElementRouter extends HTMLElement {
     
     constructor() {
         super();
@@ -77,7 +77,7 @@ export class LitElementRouter extends HTMLElement {
 
         for (let child of children) {
             const path = child.getAttribute('path');
-            if (!path || child.nodeName !== "LIT-ELEMENT-ROUTE") {
+            if (!path || child.nodeName !== "ELEMENT-ROUTE") {
                 break;
             } 
 
@@ -130,11 +130,11 @@ export class LitElementRouter extends HTMLElement {
         element && this.shadowRoot.appendChild(element);
     }
 }
-customElements.define('lit-element-router', LitElementRouter);
+customElements.define('element-router', ElementRouter);
 
 
-export class LitElementRoute extends HTMLElement{
+export class ElementRoute extends HTMLElement{
 
 }
 
-customElements.define('lit-element-route', LitElementRoute);
+customElements.define('element-route', ElementRoute);
