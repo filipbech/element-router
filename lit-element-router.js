@@ -44,17 +44,22 @@ export class LitElementRouter extends HTMLElement {
 
 
     resolveElement(routeEle, properties = {}) {
-
-        let elementAttr = routeEle.getAttribute('element');
         let returnEle;
 
+        let elementAttr = routeEle.getAttribute('element');
         if(elementAttr) {
             returnEle = document.createElement(elementAttr);
         }
+
         let redirectAttr = routeEle.getAttribute('redirect');
         if(redirectAttr) {
             route(redirectAttr);
             return null;
+        }
+
+        let template = routeEle.children[0];
+        if(template && template.nodeName === 'TEMPLATE') {
+            return document.importNode(template.content, true);
         }
 
         for (let prop in properties) {

@@ -8,7 +8,7 @@ Inspiration and lots of snippets used from Preact-router - https://github.com/de
 # Wishlist
 x statiske 
 x dynamiske paths
-- route - (import {route} from './lit-element-router.js' og så route('/about');
+x route - (import {route} from './lit-element-router.js' og så route('/about');
 - active på links
 - ability to listen for route-changes
 - only handle routeable urls...
@@ -22,6 +22,7 @@ x a catch-all route (for 404 or generic)
 x redirects
 x skip lit dependency 
 - rename into just element-router
+x route to inline template
 
 # API-suggestion
 In stead of putting the path on the individual elements, make a route-element that loads excisting elements, imports new ones or just uses an inline template

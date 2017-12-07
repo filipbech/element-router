@@ -13,12 +13,19 @@ export class RoutedApp extends LitElement {
             <button on-click=${e => route('/about')}>page2</button>
             <button on-click=${e => route('/about/us')}>page4 - redirect to 2</button>
             <button on-click=${e => route('/page/123')}>page3 (123)</button>
+            <button on-click=${e => route('/just-template')}>just a template</button>
             <button on-click=${e => route('/fglsdklfjdsdkf')}>catch all example</button>
             <lit-element-router>
                 <lit-element-route path="/" element="page-1"></lit-element-route>
                 <lit-element-route path="/page/:test" element="page-3"></lit-element-route>
                 <lit-element-route path="/about" element="page-2"></lit-element-route>
                 <lit-element-route path="/about/us" redirect="/about"></lit-element-route>
+                <lit-element-route path="/just-template">
+                    <template>
+                        <style>h1 { color:red; }</style>
+                        <h1>What im in a template</h1>
+                    </template>
+                </lit-element-route>
                 <lit-element-route path="*" element="page-404"></lit-element-route>
             </lit-element-router>
         `
