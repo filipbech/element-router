@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy":"copyfiles demo/*.js demo.html element-router.js router-link.js public && firebase deploy",
     "serve": "ws --spa demo.html",
     "checksize": "uglifyjs element-router.js -mc --toplevel | gzip -9 | wc -c"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lit-html-element": "^0.6.10",
     "local-web-server": "^2.2.4",
-    "uglify-es": "^3.2.1"
+    "uglify-es": "^3.2.1",
+    "copyfiles": "^1.2.0"
   }
 }

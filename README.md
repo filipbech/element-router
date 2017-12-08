@@ -2,6 +2,8 @@
 
 A simple router for webcomponents v1 with no dependencies and a tiny footprint (<1kb).
 
+**Demo:** [Check out a demo here](https://elementrouter.firebaseapp.com/about)
+
 Inspiration and lots of snippets used from [Preact-router](https://github.com/developit/preact-router). Thanks guys!
 
 `Element-router` provides a `<element-router>`-element that conditionally renders elements when the URL matches the configures path. It (optionally) provides a `<router-link>`-element to handle navigation and showing active state. 
@@ -52,5 +54,7 @@ Multiple matching element-route's are prioritized by their DOM-order - only the 
 `router-link.js` is a seperate element (in a seperate file) that defines a `<router-link>`-element for navigation. Use with href-attribute (like a regular a-tag). This will in fact render an a-tag and conditionally put an 'active' class on it. 
 
 # Try it out?
+You can try a [demo here](https://elementrouter.firebaseapp.com/about) or you can run it locally. 
+
 After running `npm install` simply run `npm run serve` to serve up the [simple demo app](https://github.com/filipbech/element-router/blob/master/demo.html).
 

@@ -1,12 +1,7 @@
-import { html, LitElement } from '../node_modules/lit-html-element/lit-element.js';
-
-export class LazyElement extends LitElement {
-    constructor() {
-        super();
+export class LazyElement extends HTMLElement {
+    connectedCallback() {
         console.log('lazy-element inited');
-    }
-    render() {
-        return html`
+        this.innerHTML = `
             <h1>This is a lazy route</h1>
             <p>Im really lazy</p>
         `
