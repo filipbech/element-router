@@ -1,12 +1,12 @@
 # Element-router
 
-The focus is to make a simple, tiny and straight-forward way to do routing for webcomponents. Goal is to keep below 1kb gzipped. 
+The focus is to make a simple, tiny and straight-forward way to do routing for webcomponents v1. Goal is to keep below 1kb gzipped. 
 
 **This is work in progress... seriously - don't use this yet... **
 
-Inspiration and lots of snippets used from [Preact-router](https://github.com/developit/preact-router).
+Inspiration and lots of snippets used from [Preact-router](https://github.com/developit/preact-router). Thanks guys!
 
-Feature-requests, bug-reports etc are welcome!
+Feature-requests, bug-reports etc... are welcome!
 
 # API-suggestion
 The element-router element is the slot where the routes are displayed. The element-route elements are for route-configuration and takes a path attribute and optional element, import or redirect as attributes or even a inline template. 
@@ -25,19 +25,19 @@ The element-router element is the slot where the routes are displayed. The eleme
 </element-router>
 ```
 
-# Wishlist / todo / ideas
-- x statiske 
-- x dynamiske paths
-- x route - (import {route} from './element-router.js' og så route('/about');
-- x lazy load a route
-- x dont init all pages up front...
-- x a catch-all route (for 404 or generic)
-- x redirects
-- x skip lit dependency 
-- x rename into just element-router
-- x route to inline template
-- x route if anybody else changes history
-- active-state på links
-- router-events
-- automatically hijack local a-tags?
+# Todo / ideas
+- x match static paths
+- x match dynamiske paths
+- x routeTo-function - (import {routeTo} from './element-router.js' og så routeTo('/about');
+- x lazy load a route (requires browser to support dynamic import() )
+- x Catch-all route (for 404 or generic)
+- x Redirects
+- x Route to inline template
+- x Automatically route if anybody else changes history
+- x Dispatch event on routechange (DOM-event on the element-router element)
+- x active-state method
+- x link-element with active-state
+- package up, cleanup
+- docs + demo
+- put on npm
 - child routes?

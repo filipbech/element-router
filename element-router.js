@@ -17,6 +17,10 @@ function createPathSegments(url) {
     return url.replace(/(^\/+|\/+$)/g, '').split('/');
 }
 
+export const active = (url, className = 'active') => {
+    return url === getCurrentUrl() ? className : '';
+}
+
 export class ElementRouter extends HTMLElement {
     constructor() {
         super();
@@ -37,6 +41,7 @@ export class ElementRouter extends HTMLElement {
         this.shadowRoot.innerHTML = '';
         const element = await this.getMatchingChild([...this.children], this.url);
         element && this.shadowRoot.appendChild(element);
+        this.dispatchEvent(new CustomEvent('routechange',{detail:{url:getCurrentUrl()}}))
     }
 
     async resolveElement(routeEle, properties = {}) {
@@ -127,5 +132,35 @@ export class ElementRouter extends HTMLElement {
 }
 customElements.define('element-router', ElementRouter);
 
+/* Do we need this? */
 export class ElementRoute extends HTMLElement{ }
 customElements.define('element-route', ElementRoute);
+
+/** this should be optional?  */
+export class RouterLink extends HTMLElement {
+    constructor() {
+        super();
+        this.href = this.href || this.getAttribute('href');
+        this.activeClass = this.activeClass || this.getAttribute('active-class') || 'active';
+
+        this.innerHTML = `<a href="${this.href}">${this.innerHTML}</a>`;
+
+        setTimeout(_ => {
+            this.update();
+            ROUTERS[0].addEventListener('routechange', () => {
+                this.update();
+            });
+            this.children[0].addEventListener('click', event => {
+                event.stopPropagation();
+                event.preventDefault();
+                routeTo(this.href);
+                return false;
+            });
+        }, 0);
+    }
+
+    update() {
+        this.children[0].className = this.href === getCurrentUrl() ? this.activeClass : '';
+    }
+}
+customElements.define('router-link', RouterLink);
