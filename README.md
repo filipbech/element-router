@@ -8,7 +8,7 @@ Inspiration and lots of snippets used from [Preact-router](https://github.com/de
 
 **Feature-requests, bug-reports & pull-requests are welcome and appreciated!**
 
-#API
+# API
 TL;DR: Place the `<element-router>` where you want page to change between routes, and add `<element-router>` elements with configuration for each route. 
 
 ## Usage Example
