@@ -17,6 +17,7 @@ TL;DR: Place the `<element-router>` where you want page to change between routes
 ```html
 <element-router>
     <element-route path="/" element="home-page"></element-route>
+    <element-route path="/product/:uid" element="product-page"></element-route>
     <element-route path="/lazy" import="lazy-element.js" element="lazy-element"></element-route>
     <element-route path="/no-element">
         <template>
