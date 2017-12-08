@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "ws --spa index.html",
+    "serve": "ws --spa demo.html",
     "checksize": "uglifyjs element-router.js -mc --toplevel | gzip -9 | wc -c"
   },
   "author": "",

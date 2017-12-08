@@ -1,14 +1,14 @@
 # Element-router
 
-The focus is to make a simple, tiny and straight-forward way to do routing for webcomponents v1. Goal is to keep below 1kb gzipped. 
+A simple way to do routing for webcomponents v1 with no dependencies and a tiny footprint. Goal is to keep below 1kb gzipped (´npm run checksize´ to see minified+gzipped size).
 
-**This is work in progress... seriously - don't use this yet... **
+**This is work in progress... seriously - don't use this yet...**
 
 Inspiration and lots of snippets used from [Preact-router](https://github.com/developit/preact-router). Thanks guys!
 
-Feature-requests, bug-reports etc... are welcome!
+Feature-requests, bug-reports & pull-requests are welcome and appreciated!
 
-# API-suggestion
+# API
 The element-router element is the slot where the routes are displayed. The element-route elements are for route-configuration and takes a path attribute and optional element, import or redirect as attributes or even a inline template. 
 
 ```html
@@ -40,4 +40,5 @@ The element-router element is the slot where the routes are displayed. The eleme
 - package up, cleanup
 - docs + demo
 - put on npm
-- child routes?
+- child routes (probably not?)
+- make this list into issues

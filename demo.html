@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <base href="/" />
+        <title>element-router test</title>
+        <style>
+            a {
+                color:#666;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            a.active {
+                color:#000;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <router-link href="/">Home</router-link>
+            <router-link href="/about">About</router-link>
+            <router-link href="/page/234">dynamic page</router-link>
+            <router-link href="/lazy">lazy</router-link>
+            <router-link href="/about/us">other about</router-link>
+        </nav>
+
+        <element-router>
+            <element-route path="/" element="page-1"></element-route>
+            <element-route path="/page/:test" element="page-3"></element-route>
+            <element-route path="/about" element="page-2"></element-route>
+            <element-route path="/lazy" import="./demo/lazy-element.js" element="lazy-element"></element-route>
+            <element-route path="/about/us" redirect="/about"></element-route>
+            <element-route path="/just-template">
+                <template>
+                    <h1>What im in a template</h1>
+                </template>
+            </element-route>
+            <element-route path="*" element="page-404"></element-route>
+        </element-router>
+
+        <script src="element-router.js" type="module"></script>
+        <script src="router-link.js" type="module"></script>
+        <script src="demo/page-1.js" type="module"></script>
+        <script src="demo/page-2.js" type="module"></script>
+        <script src="demo/page-3.js" type="module"></script>
+    </body>
+</html>

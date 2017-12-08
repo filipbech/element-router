@@ -1,14 +1,6 @@
-import { html, LitElement } from './node_modules/lit-html-element/lit-element.js';
+import { html, LitElement } from '../node_modules/lit-html-element/lit-element.js';
 
 export class Page404Element extends LitElement {
-    constructor(){
-        super();
-        console.log('page404 init');
-    }
-    connectedCallback() {
-        console.log('page404 connected');
-        super.connectedCallback();
-    }
     render() {
         return html`
             <h1>This is a 404 page</h1>

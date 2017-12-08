@@ -1,4 +1,4 @@
-const ROUTERS = [];
+export const ROUTERS = [];
 const EMPTY = {};
 
 export const routeTo = (url) => {
@@ -9,7 +9,7 @@ export const routeTo = (url) => {
     return ROUTERS[0].routeTo(url);
 };
 
-function getCurrentUrl() {
+export function getCurrentUrl() {
     return `${location.pathname || ''}${location.search || ''}`;
 }
 
@@ -75,7 +75,6 @@ export class ElementRouter extends HTMLElement {
     }
 
     getMatchingChild(children, url) {
-
         const queryRegex = /(?:\?([^#]*))?(#.*)?$/;
         //const queryParams = url.match(queryRegex);
         url = url.replace(queryRegex, '');
@@ -131,36 +130,3 @@ export class ElementRouter extends HTMLElement {
     }
 }
 customElements.define('element-router', ElementRouter);
-
-/* Do we need this? */
-export class ElementRoute extends HTMLElement{ }
-customElements.define('element-route', ElementRoute);
-
-/** this should be optional?  */
-export class RouterLink extends HTMLElement {
-    constructor() {
-        super();
-        this.href = this.href || this.getAttribute('href');
-        this.activeClass = this.activeClass || this.getAttribute('active-class') || 'active';
-
-        this.innerHTML = `<a href="${this.href}">${this.innerHTML}</a>`;
-
-        setTimeout(_ => {
-            this.update();
-            ROUTERS[0].addEventListener('routechange', () => {
-                this.update();
-            });
-            this.children[0].addEventListener('click', event => {
-                event.stopPropagation();
-                event.preventDefault();
-                routeTo(this.href);
-                return false;
-            });
-        }, 0);
-    }
-
-    update() {
-        this.children[0].className = this.href === getCurrentUrl() ? this.activeClass : '';
-    }
-}
-customElements.define('router-link', RouterLink);
