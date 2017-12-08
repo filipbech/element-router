@@ -50,3 +50,7 @@ Multiple matching element-route's are prioritized by their DOM-order - only the 
 
 ## router-link
 `router-link.js` is a seperate element (in a seperate file) that defines a `<router-link>`-element for navigation. Use with href-attribute (like a regular a-tag). This will in fact render an a-tag and conditionally put an 'active' class on it. 
+
+# Try it out?
+After running `npm install` simply run `npm run serve` to serve up the [simple demo app](https://github.com/filipbech/element-router/blob/master/demo.html).
+
