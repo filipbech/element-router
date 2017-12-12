@@ -1,4 +1,4 @@
-export class Page404Element extends extends HTMLElement {
+export class Page404Element extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <h1>This is a 404 page</h1>
