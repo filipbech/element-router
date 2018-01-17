@@ -32,7 +32,7 @@ export class ElementRouter extends HTMLElement {
         this.routeTo(getCurrentUrl());
 
         addEventListener('popstate', () => {
-            routeTo(getCurrentUrl());
+            this.routeTo(getCurrentUrl());
         });
     }
 
