@@ -2,6 +2,8 @@
 
 A simple router for webcomponents v1 with no dependencies and a tiny footprint (<1kb).
 
+Download from here, or from npm (element-router). `npm install element-router`.
+
 **Demo:** [Check out a demo here](https://elementrouter.firebaseapp.com/about)
 
 **Playground:** [Remix a version to play with on glitch](https://glitch.com/edit/#!/element-router?path=package.json:1:0)
