@@ -1,6 +1,6 @@
 {
   "name": "element-router",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "serve": "ws --spa demo.html",
     "checksize": "uglifyjs element-router.js -mc --toplevel | gzip -9 | wc -c"
   },
-  "author": "",
+  "author": "filipbech",
   "license": "ISC",
   "devDependencies": {
     "local-web-server": "^2.2.4",
