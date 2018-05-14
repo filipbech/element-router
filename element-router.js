@@ -25,7 +25,7 @@ export class ElementRouter extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        if(ROUTERS.length) {
+        if (ROUTERS.length) {
             throw new Error('only one outlet allowed');
         }
         ROUTERS.push(this);
@@ -53,18 +53,18 @@ export class ElementRouter extends HTMLElement {
         }
 
         let elementAttr = routeEle.getAttribute('element');
-        if(elementAttr) {
+        if (elementAttr) {
             returnEle = document.createElement(elementAttr);
         }
 
         let redirectAttr = routeEle.getAttribute('redirect');
-        if(redirectAttr) {
+        if (redirectAttr) {
             routeTo(redirectAttr);
             return null;
         }
 
         let template = routeEle.children[0];
-        if(template && template.nodeName === 'TEMPLATE') {
+        if (template && template.nodeName === 'TEMPLATE') {
             return document.importNode(template.content, true);
         }
 
@@ -86,11 +86,11 @@ export class ElementRouter extends HTMLElement {
                 break;
             } 
 
-            if(path === '*') {
+            if (path === '*') {
                 return this.resolveElement(child); 
             }
 
-            if(path === url) {
+            if (path === url) {
                 /** Fast exit if direct match */
                 return this.resolveElement(child);
             }
@@ -123,7 +123,7 @@ export class ElementRouter extends HTMLElement {
                 ret = true;
                 
             }
-            if(ret) {
+            if (ret) {
                 return this.resolveElement(child, matches);
             }
         }
