@@ -10,6 +10,12 @@
   },
   "author": "filipbech",
   "license": "ISC",
+  "homepage": "https://github.com/filipbech/element-router#readme",
+  "bugs": "https://github.com/filipbech/element-router/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filipbech/element-router.git"
+  },
   "devDependencies": {
     "local-web-server": "^2.2.4",
     "uglify-es": "^3.2.1",
