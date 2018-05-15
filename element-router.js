@@ -26,7 +26,7 @@ export class ElementRouter extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         if (ROUTERS.length) {
-            throw new Error('only one outlet allowed');
+            throw new DOMException("Only instantiable in a top-level browsing context", "SecurityError");
         }
         ROUTERS.push(this);
         this.routeTo(getCurrentUrl());
