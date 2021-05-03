@@ -1,8 +1,7 @@
 import { routeTo, ROUTERS, getCurrentUrl } from './element-router.js';
 
 export class RouterLink extends HTMLElement {
-    constructor() {
-        super();
+    connectedCallback() {
         this.href = this.href || this.getAttribute('href');
         this.activeClass = this.activeClass || this.getAttribute('active-class') || 'active';
 
